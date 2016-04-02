@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row text-center">
+        <h1>Free Code Camp Weather App</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 infobox" id="choose_system">
+            <p id="text1"></p>
+            <div class="onoffswitch">
+                <input 
+                type="checkbox" 
+                name="onoffswitch" 
+                class="onoffswitch-checkbox" 
+                id="myonoffswitch" 
+                onclick="checkMetric(this)" 
+                checked>
+                <label class="onoffswitch-label" for="myonoffswitch">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+            <p id="text2"></p>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 infobox" id="data">
+            <h4>You are located at:</h4>
+            <p id="actualLon"></p>
+            <p id="actualLat"></p>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 infobox" id="station">
+            <h4>Your nearest weather station is:</h4>
+            <p id="actualLon">Ville</p>
+            <p id="actualLat">Province, pays</p>
+        </div>
+    </div>
+    <div class="row">
+        <img src="img/nuage.jpg" alt="sunny">
+    </div>
+    <div>
+        <h4>json Results</h4>
+        <p>
+            Longitude: <span id="stnLon"></span><br>
+            Latitude: <span id="stnLat"></span>
+        </p>
+        <p>
+            Weather condition id: <span id="condId"></span><br>
+            Group of weather parameter (weather.main): <span id="weatherMain"></span><br>
+            Weather description: <span id="description"></span><br>
+            Weather icon: <span id="icon"></span><br>
+            base: <span id="base"></span><br>
+        </p>
+        <h4>Main</h4>
+        <p>
+            temp in Kelvin (main.temp): <span id="temp"></span><br>
+            temp in Celcius (main.temp): <span id="tempCelcius"></span><br>
+            pressure (main.pressure): <span id="pressure"></span><br>
+            Humidity: <span id="humidity"></span><br>
+            Min. temp. of the moment: <span id="temp_min"></span><br>
+            Max. temp. of the moment: <span id="temp_max"></span><br>
+            Pressure ground level: <span id="grnd_level"></span><br>
+            Wind speed (meter/sec): <span id="wind_speed"></span><br>
+            Wind degree: <span id="wind_deg"></span><br>
+            Cloudiness, %: <span id="cloudiness"></span><br>
+            Rain volume last 3 hours: <span id="rain"></span><br>
+            Snow volume last 3 hours: <span id="snow"></span><br>
+            Time of calculation: <span id="time"></span><br>
+            Country Code: <span id="ctry_code"></span><br>
+            Sunrise: <span id="sunrise"></span><br>
+            Sunset: <span id="sunset"></span><br>
+            City Id: <span id="city_id"></span><br>
+            City Name: <span id="city"></span><br>
+        </p>
+    </div>
+</div>
+
+<div class="message">
+    "message s'affiche ici"
+</div> 
+
+<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+<script 
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
+    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
+    crossorigin="anonymous">
+</script>
+
+<script src="js/script.js"></script>
+</body>
+</html>
