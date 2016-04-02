@@ -1,4 +1,7 @@
+// default unit system is metric
 var metric = true;
+
+// options to be passed to navigator.geolocation.getCurrentPosition
 var options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -6,6 +9,7 @@ var options = {
 };
 
 function success(pos) {
+    // success callback for navigator.geolocation.getCurrentPosition
     var crd = pos.coords;
     $("#actualLon").html("Longitude: " 
             + Math.round(crd.longitude * 1000) / 1000
@@ -19,11 +23,12 @@ function success(pos) {
 };
 
 function error(err) {
+    // error callback for navigator.geolocation.getCurrentPosition
     console.warn('ERROR(' + err.code + '): ' + err.message);
 };
 
-function checkMetric(checkbox)
-{
+function checkMetric(checkbox) {
+    // check if the unit choosing button have been clicked
     if (checkbox.checked==false)
     {
         metric = false;
@@ -47,10 +52,12 @@ function getMeteo(latitude, longitude, metric) {
         units = "units=imperial&";
     }
     console.log(apiUrl + lat + lon + units + appKey)
-    //$.getJSON(apiUrl + lat + lon + units + appKey, function(json) {
-    };
+    //$.getJSON(apiUrl + lat + lon + units + appKey, displayResult); 
+};
+    
 
 function showSystemChooser(metric) {
+    // messages displayed in the unit chooser box
     var text1 = "In line with the entire world minus 3 countries, this app uses the "; 
     var text2 = "system. Click if you live in one of those countries: Myanmar, Liberia, USA.";
     if (!metric) {
@@ -66,7 +73,34 @@ function showSystemChooser(metric) {
 showSystemChooser(metric);
 navigator.geolocation.getCurrentPosition(success, error, options);
 
-
+function displayResult(json) {
+    $(".message").html(JSON.stringify(json));
+    $("#stnLon").html(json.coord.lon);
+    $("#stnLat").html(json.coord.lat);
+    $("#condId").html(json.weather[0].id);
+    $("#weatherMain").html(json.weather[0].main);
+    $("#description").html(json.weather[0].description);
+    $("#icon").html(json.weather[0].icon);
+    $("#base").html(json.base);
+    $("#temp").html(json.main.temp);
+    $("#tempCelcius").html(json.main.temp - 273.15);
+    $("#pressure").html(json.main.pressure);
+    $("#humidity").html(json.main.humidity);
+    $("#temp_min").html(json.main.temp_min);
+    $("#temp_max").html(json.main.temp_max);
+    $("#grnd_level").html(json.main.grnd_level);
+    $("#wind_speed").html(json.wind.speed);
+    $("#wind_deg").html(json.wind.deg);
+    $("#cloudiness").html(json.clouds.all);
+    $("#rain").html(JSON.stringify(json.rain));
+    $("#rain").html(JSON.stringify(json.snow));
+    $("#time").html(json.dt);
+    $("#sunrise").html(json.sys.sunrise);
+    $("#sunset").html(json.sys.sunset);
+    $("#ctry_code").html(json.sys.country);
+    $("#city_id").html(json.id);
+    $("#city").html(json.name);
+};
    
  /*
 function getLocation() {

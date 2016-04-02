@@ -2,3 +2,9 @@
 *.png
 *.eps
 *.xcf
+*.swp
+*.*~
+*.zip
+*.gz
+
+
