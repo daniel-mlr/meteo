@@ -18,42 +18,7 @@
     </div>
 
     <div class="row">
-        <!--
-        <div class="col-sm-4">
-            <div class="infobox" id="choose_system">
-                <p id="text1"></p>
-                <div class="onoffswitch">
-                    <input 
-                    type="checkbox" 
-                    name="onoffswitch" 
-                    class="onoffswitch-checkbox" 
-                    id="myonoffswitch" 
-                    onclick="checkMetric(this)" 
-                    checked>
-                    <label class="onoffswitch-label" for="myonoffswitch">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div>
-                <p id="text2"></p>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="infobox" id="data">
-                <h4>You are located at:</h4>
-                <p id="actualLon"></p>
-                <p id="actualLat"></p>
-            </div>
-        </div>
-        <div class="col-sm-4" id="station">
-            <div class="infobox" id="station">
-                <h4>Your nearest weather station is:</h4>
-                <p id="actualLon">Ville</p>
-                <p id="actualLat">Province, pays</p>
-            </div>
-        </div>
-        -->
-        <div class="col-sm-3 infobox" id="choose_system">
+        <div class="col-sm-3 col-xs-12 infobox" id="choose_system">
             <p id="text1"></p>
             <div class="onoffswitch">
                 <input 
@@ -70,21 +35,38 @@
             </div>
             <p id="text2"></p>
         </div>
-        <div class="col-sm-3 col-sm-offset-1 infobox" id="data">
+        <div class="col-sm-3 col-xs-12 col-sm-offset-1 infobox" id="data">
             <h4>You are located at:</h4>
-            <p id="actualLon"></p>
-            <p id="actualLat"></p>
+            <p>Longitude: <span id="actualLon"></span></p>
+            <p>Latitude: <span id="actualLat"></span></p>
+            <p id="accuracy"></p>
+
         </div>
-        <div class="col-sm-3 col-sm-offset-1 infobox" id="station">
+        <div class="col-sm-3 hidden-xs col-sm-offset-1 infobox" id="station">
             <h4>Your nearest weather station is:</h4>
-            <p id="actualLon">Ville</p>
-            <p id="actualLat">Province, pays</p>
+            <p>City: <span id="city"></span></p>
+            <p>State, Country: <span id="ctry_code"></span></p>
         </div>
     </div>
     <div class="row">
-        <img src="img/nuage.jpg" alt="sunny">
+        <div class="col-sm-4">
+            <img id="icon" src="img/nuage.jpg" alt="sunny">
+        </div>
+        <div class="col-sm-4 temp_box">
+                Temperature: <span id="temp"></span><br>
+                Weather: <span id="description"></span><br>
+                Humidity: <span id="humidity"></span><br>
+                pressure: <span id="pressure"></span><br>
+        </div>
+        <div class="col-sm-4 temp_box">
+            Wind speed: <span id="wind_speed"></span><br>
+            Wind degree: <span id="wind_deg"></span><br>
+            Sunrise: <span id="sunrise"></span><br>
+            Sunset: <span id="sunset"></span><br>
+        </div>
     </div>
     <div>
+        <!--
         <h4>json Results</h4>
         <p>
             Longitude: <span id="stnLon"></span><br>
@@ -93,37 +75,29 @@
         <p>
             Weather condition id: <span id="condId"></span><br>
             Group of weather parameter (weather.main): <span id="weatherMain"></span><br>
-            Weather description: <span id="description"></span><br>
             Weather icon: <span id="icon"></span><br>
             base: <span id="base"></span><br>
         </p>
-        <h4>Main</h4>
+        -->
+        <!--
         <p>
-            temp in Kelvin (main.temp): <span id="temp"></span><br>
-            temp in Celcius (main.temp): <span id="tempCelcius"></span><br>
-            pressure (main.pressure): <span id="pressure"></span><br>
-            Humidity: <span id="humidity"></span><br>
             Min. temp. of the moment: <span id="temp_min"></span><br>
             Max. temp. of the moment: <span id="temp_max"></span><br>
             Pressure ground level: <span id="grnd_level"></span><br>
-            Wind speed (meter/sec): <span id="wind_speed"></span><br>
-            Wind degree: <span id="wind_deg"></span><br>
             Cloudiness, %: <span id="cloudiness"></span><br>
             Rain volume last 3 hours: <span id="rain"></span><br>
             Snow volume last 3 hours: <span id="snow"></span><br>
             Time of calculation: <span id="time"></span><br>
-            Country Code: <span id="ctry_code"></span><br>
-            Sunrise: <span id="sunrise"></span><br>
-            Sunset: <span id="sunset"></span><br>
-            City Id: <span id="city_id"></span><br>
-            City Name: <span id="city"></span><br>
         </p>
+        -->
     </div>
 </div>
 
+<!--
 <div class="message">
     "message s'affiche ici"
 </div> 
+-->
 
 <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
 <script 

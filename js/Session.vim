@@ -85,20 +85,21 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 set tabline=%!pyeval('powerline.tabline()')
 set tabstop=4
 set wildignore=*.o,*.obj,*.bak,*.exe
+set window=42
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/mooc/freecodecamp/projets/meteo
+cd ~/mooc/freecodecamp/projets/meteo/js
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +23 ~/mooc/freecodecamp/projets/meteo/index.html
+badd +60 ~/mooc/freecodecamp/projets/meteo/index.html
 badd +2 ~/mooc/freecodecamp/projets/meteo/css/style.css
 badd +1 ~/mooc/freecodecamp/projets/meteo/js/script.js
 argglobal
 silent! argdel *
-argadd index.html
+argadd ~/mooc/freecodecamp/projets/meteo/index.html
 set stal=2
 edit ~/mooc/freecodecamp/projets/meteo/index.html
 set splitbelow splitright
@@ -219,11 +220,11 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 60 - ((35 * winheight(0) + 21) / 42)
+let s:l = 58 - ((21 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-60
+58
 normal! 09|
 wincmd w
 argglobal
@@ -335,13 +336,14 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 18 - ((17 * winheight(0) + 21) / 42)
+let s:l = 81 - ((0 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-18
-normal! 016|
+81
+normal! 05|
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 84 + 85) / 170)
 exe 'vert 2resize ' . ((&columns * 85 + 85) / 170)
 tabedit ~/mooc/freecodecamp/projets/meteo/css/style.css
@@ -457,12 +459,12 @@ setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 108 - ((41 * winheight(0) + 21) / 42)
+let s:l = 113 - ((38 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-108
-normal! 0
+113
+normal! 021|
 tabnext 1
 set stal=1
 if exists('s:wipebuf')

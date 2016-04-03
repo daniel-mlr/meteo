@@ -11,11 +11,9 @@ var options = {
 function success(pos) {
     // success callback for navigator.geolocation.getCurrentPosition
     var crd = pos.coords;
-    $("#actualLon").html("Longitude: " 
-            + Math.round(crd.longitude * 1000) / 1000
-            + "<br>Latitude: " 
-            + Math.round(crd.latitude * 1000) / 1000
-            + "<br>More or less " 
+    $("#actualLon").html(Math.round(crd.longitude * 1000) / 1000);
+    $("#actualLat").html(Math.round(crd.latitude * 1000) / 1000);
+    $("#accuracy").html("More or less " 
             + Math.round(crd.accuracy * ( metric ? 1: 3.28084))
             + (metric ? " meters": " feet")
             );
@@ -52,7 +50,7 @@ function getMeteo(latitude, longitude, metric) {
         units = "units=imperial&";
     }
     console.log(apiUrl + lat + lon + units + appKey)
-    //$.getJSON(apiUrl + lat + lon + units + appKey, displayResult); 
+    $.getJSON(apiUrl + lat + lon + units + appKey, displayResult); 
 };
     
 
@@ -74,34 +72,55 @@ showSystemChooser(metric);
 navigator.geolocation.getCurrentPosition(success, error, options);
 
 function displayResult(json) {
-    $(".message").html(JSON.stringify(json));
-    $("#stnLon").html(json.coord.lon);
-    $("#stnLat").html(json.coord.lat);
-    $("#condId").html(json.weather[0].id);
-    $("#weatherMain").html(json.weather[0].main);
+    //$(".message").html(JSON.stringify(json));
+    //$("#stnLon").html(json.coord.lon);
+    //$("#stnLat").html(json.coord.lat);
+    //$("#condId").html(json.weather[0].id);
+    //$("#weatherMain").html(json.weather[0].main);
+    $("#icon").attr("src", iconName(json.weather[0].icon));
+    $("#icon").attr("alt", json.weather[0].description);
+    $("#temp").html(json.main.temp + "&#176;" + (metric ? " C" : " F"));
     $("#description").html(json.weather[0].description);
-    $("#icon").html(json.weather[0].icon);
-    $("#base").html(json.base);
-    $("#temp").html(json.main.temp);
-    $("#tempCelcius").html(json.main.temp - 273.15);
-    $("#pressure").html(json.main.pressure);
-    $("#humidity").html(json.main.humidity);
-    $("#temp_min").html(json.main.temp_min);
-    $("#temp_max").html(json.main.temp_max);
-    $("#grnd_level").html(json.main.grnd_level);
-    $("#wind_speed").html(json.wind.speed);
-    $("#wind_deg").html(json.wind.deg);
-    $("#cloudiness").html(json.clouds.all);
-    $("#rain").html(JSON.stringify(json.rain));
-    $("#rain").html(JSON.stringify(json.snow));
-    $("#time").html(json.dt);
-    $("#sunrise").html(json.sys.sunrise);
-    $("#sunset").html(json.sys.sunset);
+    $("#humidity").html(json.main.humidity + "%");
+    $("#pressure").html(json.main.pressure + " hPa");
+    //$("#base").html(json.base);
+    //$("#temp_min").html(json.main.temp_min);
+    //$("#temp_max").html(json.main.temp_max);
+    //$("#grnd_level").html(json.main.grnd_level);
+    $("#wind_speed").html(json.wind.speed + (metric ? " m/sec" : " mph"));
+    $("#wind_deg").html(json.wind.deg + "&#176;");
+    //$("#cloudiness").html(json.clouds.all);
+    //$("#rain").html(JSON.stringify(json.rain));
+    //$("#rain").html(JSON.stringify(json.snow));
+    //$("#time").html(json.dt);
+    $("#sunrise").html(humanHour(json.sys.sunrise, metric));
+    $("#sunset").html(humanHour(json.sys.sunset, metric));
     $("#ctry_code").html(json.sys.country);
-    $("#city_id").html(json.id);
+    //$("#city_id").html(json.id);
     $("#city").html(json.name);
 };
-   
+  
+function humanHour(utc, metric) {
+    var timestamp = utc,
+    date = new Date(timestamp * 1000);
+    var hr = date.getHours();
+    var min = date.getMinutes();
+
+    if (metric) {
+        return hr + ":" + min;
+    } else {
+        if (hr > 11) {
+            return (hr - 12) + "h " + min + " pm";
+        } else {
+            return hr + "h " + min + " am";
+        }
+    }
+}
+
+function iconName(icon_code) {
+    return "img/soleil.jpg";
+}
+
  /*
 function getLocation() {
     if (navigator.geolocation) {

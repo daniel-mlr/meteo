@@ -59,6 +59,21 @@
     color: #333;
     height: 170px;
 }
+@media (min-width: 768px) and (max-width: 979px) {
+    .infobox {
+        height: 200px;
+    }
+}
+@media (max-width: 767px) {
+    .infobox {
+        max-width: 400px;
+        /*
+        */
+        margin: 10px auto;
+        height: auto;
+    }
+}
+
 body {
     background: #080808;
     color: #999;
@@ -84,4 +99,17 @@ body {
     display: table-cell;
     vertical-align: top;
     */
+}
+#city, #ctry_code {
+    font-weight: 900;
+}
+#actualLon, #actualLat {
+    font-weight: bold;
+}
+.temp_box {
+    margin-top: 50px;
+}
+.temp_box > span {
+    font-size: large;
+    font-weight: 900;
 }
