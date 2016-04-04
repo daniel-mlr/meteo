@@ -22,6 +22,7 @@ function success(pos) {
 
 function error(err) {
     // error callback for navigator.geolocation.getCurrentPosition
+    alert("There was a problem getting current geolocation");
     console.warn('ERROR(' + err.code + '): ' + err.message);
 };
 
@@ -49,7 +50,7 @@ function getMeteo(latitude, longitude, metric) {
     } else {
         units = "units=imperial&";
     }
-    console.log(apiUrl + lat + lon + units + appKey)
+    //console.log(apiUrl + lat + lon + units + appKey)
     $.getJSON(apiUrl + lat + lon + units + appKey, displayResult); 
 };
     
@@ -73,31 +74,23 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 function displayResult(json) {
     //$(".message").html(JSON.stringify(json));
-    //$("#stnLon").html(json.coord.lon);
-    //$("#stnLat").html(json.coord.lat);
-    //$("#condId").html(json.weather[0].id);
-    //$("#weatherMain").html(json.weather[0].main);
     $("#icon").attr("src", iconName(json.weather[0].icon));
+    //$("#icon").attr("src", iconName("10n"));
     $("#icon").attr("alt", json.weather[0].description);
     $("#temp").html(json.main.temp + "&#176;" + (metric ? " C" : " F"));
     $("#description").html(json.weather[0].description);
     $("#humidity").html(json.main.humidity + "%");
     $("#pressure").html(json.main.pressure + " hPa");
-    //$("#base").html(json.base);
-    //$("#temp_min").html(json.main.temp_min);
-    //$("#temp_max").html(json.main.temp_max);
-    //$("#grnd_level").html(json.main.grnd_level);
     $("#wind_speed").html(json.wind.speed + (metric ? " m/sec" : " mph"));
     $("#wind_deg").html(json.wind.deg + "&#176;");
-    //$("#cloudiness").html(json.clouds.all);
-    //$("#rain").html(JSON.stringify(json.rain));
-    //$("#rain").html(JSON.stringify(json.snow));
-    //$("#time").html(json.dt);
     $("#sunrise").html(humanHour(json.sys.sunrise, metric));
     $("#sunset").html(humanHour(json.sys.sunset, metric));
-    $("#ctry_code").html(json.sys.country);
-    //$("#city_id").html(json.id);
-    $("#city").html(json.name);
+    $(".ctry_code").html(json.sys.country);
+    $(".city").html(json.name);
+    // correction de la couleur de fond des icones de nuit
+    if (json.weather[0].icon[2] == "n") {
+        $("body").css("background", "#070506");
+    }
 };
   
 function humanHour(utc, metric) {
@@ -118,66 +111,60 @@ function humanHour(utc, metric) {
 }
 
 function iconName(icon_code) {
-    return "img/soleil.jpg";
+    switch (icon_code) {
+        case "01d": 
+            return "img/soleil.jpg";
+            break;
+        case "02d": 
+            return "img/soleil_nuage_leger.jpg";
+            break;
+        case "03d": 
+            return "img/soleil_nuage_moyen.jpg";
+            break;
+        case "04d": 
+            return "img/nuage.jpg";
+            break;
+        case "09d": 
+            return "img/averse.jpg";
+            break;
+        case "10d": 
+            return "img/soleil_pluie.jpg";
+            break;
+        case "11d": 
+            return "img/orage.jpg";
+            break;
+        case "13d": 
+            return "img/nuage_neige.jpg";
+            break;
+        case "50d": 
+            return "img/smog.png";
+            break;
+        case "01n": 
+            return "img/lune_nouvelle.jpg";
+            break;
+        case "02n": 
+            return "img/lune_nouvelle_nuage.jpg";
+            break;
+        case "03n": 
+            return "img/lune_pleine_nuage.jpg";
+            break;
+        case "04n": 
+            return "img/nuage.jpg";
+            break;
+        case "09n": 
+            return "img/averse.jpg";
+            break;
+        case "10n": 
+            return "img/lune_pluie.jpg";
+            break;
+        case "11n": 
+            return "img/lune_orage.jpg";
+            break;
+        case "13n": 
+            return "img/nuage_neige.jpg";
+            break;
+        case "50n": 
+            return "img/smog.png";
+            break;
+    }
 }
-
- /*
-function getLocation() {
-    if (navigator.geolocation) {
-        console.log("geolocation");
-        navigator.geolocation.getCurrentPosition(function(position) {
-            console.log("position coordonnées:" + position.coords.latitude);
-            return position.coords;
-        });
-    };
-};
-var pos = getLocation();
-console.log(pos.latitude);
-
-function getocalWeatherData() {
-};
-
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        $("#data").html(
-                "latitude: " 
-                + position.coords.latitude 
-                + "<br>longitude: " 
-                + position.coords.longitude
-                );
-        var apiUrl = "http://api.openweathermap.org/data/2.5/weather?";
-        var lat = "lat=" + position.coords.latitude + "&";
-        var lon = "lon=" + position.coords.longitude + "&";
-        var appKey = "appid=baf37919f49115f732bc4e9827fd3d4c";
-        //console.log(apiUrl + lat + lon + appKey);
-        $.getJSON(apiUrl + lat + lon + appKey, function(json) {
-            $(".message").html(JSON.stringify(json));
-            $("#stnLon").html(json.coord.lon);
-            $("#stnLat").html(json.coord.lat);
-            $("#condId").html(json.weather[0].id);
-            $("#weatherMain").html(json.weather[0].main);
-            $("#description").html(json.weather[0].description);
-            $("#icon").html(json.weather[0].icon);
-            $("#base").html(json.base);
-            $("#temp").html(json.main.temp);
-            $("#tempCelcius").html(json.main.temp - 273.15);
-            $("#pressure").html(json.main.pressure);
-            $("#humidity").html(json.main.humidity);
-            $("#temp_min").html(json.main.temp_min);
-            $("#temp_max").html(json.main.temp_max);
-            $("#grnd_level").html(json.main.grnd_level);
-            $("#wind_speed").html(json.wind.speed);
-            $("#wind_deg").html(json.wind.deg);
-            $("#cloudiness").html(json.clouds.all);
-            $("#rain").html(JSON.stringify(json.rain));
-            $("#rain").html(JSON.stringify(json.snow));
-            $("#time").html(json.dt);
-            $("#sunrise").html(json.sys.sunrise);
-            $("#sunset").html(json.sys.sunset);
-            $("#ctry_code").html(json.sys.country);
-            $("#city_id").html(json.id);
-            $("#city").html(json.name);
-        });
-    });
-}
-*/

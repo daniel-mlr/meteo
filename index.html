@@ -44,8 +44,16 @@
         </div>
         <div class="col-sm-3 hidden-xs col-sm-offset-1 infobox" id="station">
             <h4>Your nearest weather station is:</h4>
-            <p>City: <span id="city"></span></p>
-            <p>State, Country: <span id="ctry_code"></span></p>
+            <p>City: <span class="city"></span></p>
+            <p>State, Country: <span class="ctry_code"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 visible-xs">
+            <h2>
+                <span class="city"></span>, 
+                <span class="ctry_code"></span>
+            </h2>
         </div>
     </div>
     <div class="row">
@@ -65,39 +73,7 @@
             Sunset: <span id="sunset"></span><br>
         </div>
     </div>
-    <div>
-        <!--
-        <h4>json Results</h4>
-        <p>
-            Longitude: <span id="stnLon"></span><br>
-            Latitude: <span id="stnLat"></span>
-        </p>
-        <p>
-            Weather condition id: <span id="condId"></span><br>
-            Group of weather parameter (weather.main): <span id="weatherMain"></span><br>
-            Weather icon: <span id="icon"></span><br>
-            base: <span id="base"></span><br>
-        </p>
-        -->
-        <!--
-        <p>
-            Min. temp. of the moment: <span id="temp_min"></span><br>
-            Max. temp. of the moment: <span id="temp_max"></span><br>
-            Pressure ground level: <span id="grnd_level"></span><br>
-            Cloudiness, %: <span id="cloudiness"></span><br>
-            Rain volume last 3 hours: <span id="rain"></span><br>
-            Snow volume last 3 hours: <span id="snow"></span><br>
-            Time of calculation: <span id="time"></span><br>
-        </p>
-        -->
-    </div>
 </div>
-
-<!--
-<div class="message">
-    "message s'affiche ici"
-</div> 
--->
 
 <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
 <script 

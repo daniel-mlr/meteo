@@ -100,14 +100,14 @@ body {
     vertical-align: top;
     */
 }
-#city, #ctry_code {
+.city, .ctry_code {
     font-weight: 900;
 }
 #actualLon, #actualLat {
     font-weight: bold;
 }
 .temp_box {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 .temp_box > span {
     font-size: large;
